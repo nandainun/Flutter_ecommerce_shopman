@@ -5,8 +5,15 @@ import 'package:shopman/widgets_common/bg_widget.dart';
 import 'package:shopman/widgets_common/custom_textfield.dart';
 import 'package:shopman/widgets_common/our_button.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool? isCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +40,14 @@ class SignUpScreen extends StatelessWidget {
                 Row(
                   children: [
                     Checkbox(
-                      checkColor: redColor,
-                      value: false,
-                      onChanged: (newValue) {},
+                      activeColor: redColor,
+                      checkColor: whiteColor,
+                      value: isCheck,
+                      onChanged: (val) {
+                        setState(() {
+                          isCheck = val;
+                        });
+                      },
                     ),
                     10.widthBox,
                     Expanded(
@@ -45,7 +57,7 @@ class SignUpScreen extends StatelessWidget {
                             TextSpan(
                               text: "I agree to the ",
                               style: TextStyle(
-                                fontFamily: bold,
+                                fontFamily: regular,
                                 color: fontGrey,
                                 fontSize: 12,
                               ),
@@ -53,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
                             TextSpan(
                               text: termAndCond,
                               style: TextStyle(
-                                fontFamily: bold,
+                                fontFamily: regular,
                                 color: redColor,
                                 fontSize: 12,
                               ),
@@ -61,7 +73,7 @@ class SignUpScreen extends StatelessWidget {
                             TextSpan(
                               text: " & ",
                               style: TextStyle(
-                                fontFamily: bold,
+                                fontFamily: regular,
                                 color: fontGrey,
                                 fontSize: 12,
                               ),
@@ -69,7 +81,7 @@ class SignUpScreen extends StatelessWidget {
                             TextSpan(
                               text: privacyPolicy,
                               style: TextStyle(
-                                fontFamily: bold,
+                                fontFamily: regular,
                                 color: redColor,
                                 fontSize: 12,
                               ),
@@ -82,7 +94,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 // Sign Up Button
                 ourButton(
-                        color: redColor,
+                        color: isCheck == true ? redColor : lightGrey,
                         title: signup,
                         textColor: whiteColor,
                         onPress: () {})
