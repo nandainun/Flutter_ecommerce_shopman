@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
 import 'package:shopman/consts/list.dart';
 import 'package:shopman/view/auth_screen/signup_screen.dart';
-import 'package:shopman/view/home_screen/home_screen.dart';
+import 'package:shopman/view/home_screen/home.dart';
 import 'package:shopman/widgets_common/bg_widget.dart';
 import 'package:shopman/widgets_common/applogo_widget.dart';
 import 'package:shopman/widgets_common/custom_textfield.dart';
@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
                     title: login,
                     textColor: whiteColor,
                     onPress: () {
-                      Get.to(() => const HomeScreen());
+                      Get.to(() => const Home());
                     }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 createNewAccount.text.color(fontGrey).make(),

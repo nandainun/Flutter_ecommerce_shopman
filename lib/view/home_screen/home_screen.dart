@@ -1,76 +1,164 @@
-import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
-import 'package:shopman/controllers/home_controller.dart';
+import 'package:shopman/consts/list.dart';
+import 'package:shopman/widgets_common/home_buttons.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // init home controller
-    var controller = Get.put(HomeController());
+    return Container(
+      padding: const EdgeInsets.all(12),
+      color: lightGrey,
+      width: context.screenWidth,
+      height: context.screenHeight,
+      child: SafeArea(
+        child: Column(
+          children: [
+            // Search Box
+            Container(
+              alignment: Alignment.center,
+              height: 60,
+              color: lightGrey,
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  suffixIcon: Icon(Icons.search),
+                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: whiteColor,
+                  hintText: searchAnything,
+                  hintStyle: TextStyle(color: textfieldGrey),
+                ),
+              ),
+            ),
 
-    var navbarItem = [
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icHome,
-            width: 26,
-          ),
-          label: home),
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icCategories,
-            width: 26,
-          ),
-          label: categories),
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icCart,
-            width: 26,
-          ),
-          label: cart),
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icProfile,
-            width: 26,
-          ),
-          label: account)
-    ];
+            15.heightBox,
 
-    var navBody = [
-      Container(
-        color: Colors.blue,
-      ),
-      Container(
-        color: Colors.amber,
-      ),
-      Container(
-        color: Colors.purple,
-      ),
-      Container(
-        color: Colors.cyan,
-      )
-    ];
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    // Swipers Brands
+                    VxSwiper.builder(
+                      aspectRatio: 16 / 9,
+                      autoPlay: true,
+                      height: 150,
+                      viewportFraction: 0.9,
+                      enlargeCenterPage: true,
+                      itemCount: sliderList.length,
+                      itemBuilder: (context, index) {
+                        return Image.asset(
+                          sliderList[index],
+                          fit: BoxFit.cover,
+                        )
+                            .box
+                            .rounded
+                            .clip(Clip.antiAlias)
+                            .margin(const EdgeInsets.symmetric(horizontal: 8))
+                            .make();
+                      },
+                    ),
+                    15.heightBox,
 
-    return Scaffold(
-      body: Column(children: [
-        Obx(
-          () => Expanded(
-            child: navBody.elementAt(controller.currentNavIndex.value),
-          ),
-        ),
-      ]),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          selectedItemColor: redColor,
-          selectedLabelStyle: TextStyle(fontFamily: semibold),
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: whiteColor,
-          items: navbarItem,
-          onTap: (value) {
-            controller.currentNavIndex.value = value;
-          },
+                    // Deals buttons
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(
+                        2,
+                        (index) => homeButtons(
+                          height: context.screenHeight * 0.15,
+                          width: context.screenWidth / 2.5,
+                          icon: index == 0 ? icTodaysDeal : icFlashDeal,
+                          title: index == 0 ? todayDeal : flashSale,
+                        ),
+                      ),
+                    ),
+                    15.heightBox,
+
+                    // 2nd Swipers Brands
+                    VxSwiper.builder(
+                      aspectRatio: 16 / 9,
+                      autoPlay: false,
+                      height: 150,
+                      viewportFraction: 0.9,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: true,
+                      itemCount: secondSliderList.length,
+                      itemBuilder: (context, index) {
+                        return Image.asset(
+                          secondSliderList[index],
+                          fit: BoxFit.cover,
+                        )
+                            .box
+                            .rounded
+                            .clip(Clip.antiAlias)
+                            .margin(const EdgeInsets.symmetric(horizontal: 8))
+                            .make();
+                      },
+                    ),
+                    15.heightBox,
+
+                    // 2nd Best Button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(
+                        3,
+                        (index) => homeButtons(
+                          height: context.screenHeight * 0.12,
+                          width: context.screenWidth / 3.9,
+                          icon: index == 0
+                              ? icTopCategories
+                              : index == 1
+                                  ? icBrands
+                                  : icTopSeller,
+                          title: index == 0
+                              ? topCategories
+                              : index == 1
+                                  ? brands
+                                  : topSellers,
+                        ),
+                      ),
+                    ),
+                    10.heightBox,
+                    // Featured
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: featureCategories.text
+                          .color(darkFontGrey)
+                          .size(22)
+                          .fontFamily(semibold)
+                          .make(),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: featureCategories.text
+                          .color(darkFontGrey)
+                          .size(22)
+                          .fontFamily(semibold)
+                          .make(),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: featureCategories.text
+                          .color(darkFontGrey)
+                          .size(22)
+                          .fontFamily(semibold)
+                          .make(),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: featureCategories.text
+                          .color(darkFontGrey)
+                          .size(22)
+                          .fontFamily(semibold)
+                          .make(),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
