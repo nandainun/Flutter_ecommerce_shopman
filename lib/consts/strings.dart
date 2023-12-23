@@ -38,3 +38,14 @@ const searchAnything = "Search anything...",
     featuredProducts = "Featured Products",
     topCategories = "Top Categories",
     featureCategories = "Featured Categories";
+
+// Category page
+const womenCLothing = "Women Clothing",
+    menCloathingFashion = "Men Cloathing & Fashion",
+    compAccess = "Computer & Accessories",
+    automobile = "Automobile",
+    kidToys = "Kid & Toys",
+    sports = "Sports",
+    jewelery = "Jewelery",
+    cellphone = "Cellphone & Tab",
+    furniture = "Furniture";
