@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
+import 'package:shopman/view/category_screen/item_details.dart';
 import 'package:shopman/widgets_common/bg_widget.dart';
 
 class CategoryDetails extends StatelessWidget {
@@ -85,7 +87,14 @@ class CategoryDetails extends StatelessWidget {
                         .outerShadowSm
                         .margin(const EdgeInsets.symmetric(horizontal: 4))
                         .padding(const EdgeInsets.all(12))
-                        .make();
+                        .make()
+                        .onTap(
+                      () {
+                        Get.to(
+                          () => const ItemDetails(title: "Dummy Title"),
+                        );
+                      },
+                    );
                   },
                 ),
               ),
