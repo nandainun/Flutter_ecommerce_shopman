@@ -11,6 +11,7 @@ const name = "Name";
 const nameHint = "Nanda Devs";
 const login = "Log in";
 const signup = "Sign up";
+const logout = "Log out";
 const createNewAccount = "or, create a new account";
 const loginWith = "Log in with";
 const privacyPolicy = "Privacy Policy";
@@ -57,3 +58,6 @@ const video = "Video",
     returnPolicy = "Return Policy",
     supportPolicy = "Support Policy",
     productsyoumaylike = "Products you may also like";
+
+// Profile string
+const wishlist = "My Wishlist", orders = "My Orders", messages = "Messages";
