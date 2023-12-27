@@ -14,9 +14,9 @@ class _SplashScreenState extends State<SplashScreen> {
   // Create method to change screen
 
   changeScreen() {
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       // Using Getx
-      Get.to(() => LoginScreen());
+      Get.to(() => const LoginScreen());
     });
   }
 
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             appname.text.fontFamily(bold).size(22).white.make(),
             5.heightBox,
             appversion.text.white.make(),
-            Spacer(),
+            const Spacer(),
             credits.text.white.fontFamily(semibold).make(),
             30.heightBox
           ],

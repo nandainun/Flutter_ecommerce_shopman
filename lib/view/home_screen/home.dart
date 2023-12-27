@@ -60,7 +60,7 @@ class Home extends StatelessWidget {
         () => BottomNavigationBar(
           currentIndex: controller.currentNavIndex.value,
           selectedItemColor: redColor,
-          selectedLabelStyle: TextStyle(fontFamily: semibold),
+          selectedLabelStyle: const TextStyle(fontFamily: semibold),
           type: BottomNavigationBarType.fixed,
           backgroundColor: whiteColor,
           items: navbarItem,

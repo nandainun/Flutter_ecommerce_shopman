@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
+import 'package:shopman/controllers/auth_controller.dart';
+import 'package:shopman/view/home_screen/home.dart';
 import 'package:shopman/widgets_common/applogo_widget.dart';
 import 'package:shopman/widgets_common/bg_widget.dart';
 import 'package:shopman/widgets_common/custom_textfield.dart';
@@ -14,6 +16,13 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool? isCheck = false;
+  var controller = Get.put(AuthController());
+
+  // text controller
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var passwordRetypeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +39,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
             40.heightBox,
             Column(
               children: [
-                customTextField(hint: nameHint, title: name),
-                customTextField(hint: emailHint, title: email),
-                customTextField(hint: passwordHint, title: password),
-                customTextField(hint: passwordHint, title: retypePass),
+                customTextField(
+                    hint: nameHint,
+                    title: name,
+                    controller: nameController,
+                    isPass: false),
+                customTextField(
+                    hint: emailHint,
+                    title: email,
+                    controller: emailController,
+                    isPass: false),
+                customTextField(
+                    hint: passwordHint,
+                    title: password,
+                    controller: passwordController,
+                    isPass: true),
+                customTextField(
+                    hint: passwordHint,
+                    title: retypePass,
+                    controller: passwordRetypeController,
+                    isPass: true),
                 5.heightBox,
 
                 // CheckBox
@@ -94,13 +119,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 // Sign Up Button
                 ourButton(
-                        color: isCheck == true ? redColor : lightGrey,
-                        title: signup,
-                        textColor: whiteColor,
-                        onPress: () {})
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                  color: isCheck == true ? redColor : lightGrey,
+                  title: signup,
+                  textColor: whiteColor,
+                  onPress: () async {
+                    if (isCheck != false) {
+                      try {
+                        await controller
+                            .signupMethod(
+                          context: context,
+                          email: emailController.text,
+                          password: passwordController.text,
+                        )
+                            .then(
+                          (value) {
+                            return controller.storeUserData(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              name: nameController.text,
+                            );
+                          },
+                        ).then((value) {
+                          VxToast.show(context, msg: loggedIn);
+                          Get.offAll(() => const Home());
+                        });
+                      } catch (e) {
+                        auth.signOut();
+                        // ignore: use_build_context_synchronously
+                        VxToast.show(context, msg: e.toString());
+                      }
+                    }
+                  },
+                ).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 RichText(
                   text: const TextSpan(

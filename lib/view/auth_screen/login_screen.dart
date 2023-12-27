@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
 import 'package:shopman/consts/list.dart';
+import 'package:shopman/controllers/auth_controller.dart';
 import 'package:shopman/view/auth_screen/signup_screen.dart';
 import 'package:shopman/view/home_screen/home.dart';
 import 'package:shopman/widgets_common/bg_widget.dart';
@@ -13,6 +14,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(AuthController());
+
     return bgWidget(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
@@ -26,12 +29,30 @@ class LoginScreen extends StatelessWidget {
             40.heightBox,
             Column(
               children: [
-                customTextField(hint: emailHint, title: email),
-                customTextField(hint: passwordHint, title: password),
+                customTextField(
+                    hint: emailHint,
+                    title: email,
+                    controller: controller.emailController,
+                    isPass: false),
+                customTextField(
+                    hint: passwordHint,
+                    title: password,
+                    controller: controller.passwordController,
+                    isPass: true),
                 Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                        onPressed: () {}, child: forgetPass.text.make())),
+                        onPressed: () async {
+                          await controller
+                              .loginMethod(context: context)
+                              .then((value) {
+                            if (value != null) {
+                              VxToast.show(context, msg: loggedIn);
+                              Get.offAll(() => const Home());
+                            }
+                          });
+                        },
+                        child: forgetPass.text.make())),
                 5.heightBox,
                 // Login Button
                 ourButton(
