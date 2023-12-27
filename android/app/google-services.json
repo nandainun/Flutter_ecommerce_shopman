@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "546354695014",
+    "project_id": "eshopman-54d48",
+    "storage_bucket": "eshopman-54d48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546354695014:android:2a63752c1e8ffe4c3916a7",
+        "android_client_info": {
+          "package_name": "com.example.shopman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7JhMnOn27wvszGD9jqmJOj6yhokGQSGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
