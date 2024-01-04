@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
+import 'package:shopman/controllers/product_controller.dart';
 import 'package:shopman/view/category_screen/item_details.dart';
 import 'package:shopman/widgets_common/bg_widget.dart';
 
@@ -9,6 +10,8 @@ class CategoryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<ProductController>();
+
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(
@@ -18,14 +21,15 @@ class CategoryDetails extends StatelessWidget {
         body: Container(
           padding: const EdgeInsets.all(12),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: List.generate(
-                    6,
-                    (index) => "Baby Clothing"
+                    controller.subcat.length,
+                    (index) => "${controller.subcat[index]}"
                         .text
                         .size(14)
                         .fontFamily(semibold)
@@ -52,10 +56,7 @@ class CategoryDetails extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: 6,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisExtent: 250,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8),
+                      crossAxisCount: 2, mainAxisExtent: 250, crossAxisSpacing: 8, mainAxisSpacing: 8),
                   itemBuilder: (context, index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,18 +68,9 @@ class CategoryDetails extends StatelessWidget {
                           fit: BoxFit.fill,
                         ),
                         10.heightBox,
-                        "Laptop 4GB"
-                            .text
-                            .fontFamily(semibold)
-                            .color(darkFontGrey)
-                            .make(),
+                        "Laptop 4GB".text.fontFamily(semibold).color(darkFontGrey).make(),
                         10.heightBox,
-                        "\$500"
-                            .text
-                            .color(redColor)
-                            .fontFamily(bold)
-                            .size(16)
-                            .make()
+                        "\$500".text.color(redColor).fontFamily(bold).size(16).make()
                       ],
                     )
                         .box

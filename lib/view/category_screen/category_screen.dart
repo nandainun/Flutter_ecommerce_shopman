@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
 import 'package:shopman/consts/list.dart';
+import 'package:shopman/controllers/product_controller.dart';
 import 'package:shopman/view/category_screen/category_details.dart';
 import 'package:shopman/widgets_common/bg_widget.dart';
 
@@ -9,6 +10,8 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
+
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(
@@ -36,21 +39,11 @@ class CategoryScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   10.heightBox,
-                  categoryList[index]
-                      .text
-                      .color(darkFontGrey)
-                      .align(TextAlign.center)
-                      .make()
+                  categoryList[index].text.color(darkFontGrey).align(TextAlign.center).make()
                 ],
-              )
-                  .box
-                  .white
-                  .rounded
-                  .clip(Clip.antiAlias)
-                  .outerShadowSm
-                  .make()
-                  .onTap(
+              ).box.white.rounded.clip(Clip.antiAlias).outerShadowSm.make().onTap(
                 () {
+                  controller.getSubCategories(categoryList[index]);
                   Get.to(() => CategoryDetails(title: categoryList[index]));
                 },
               );

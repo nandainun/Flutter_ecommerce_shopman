@@ -28,24 +28,18 @@ const categoryList = [
 ];
 
 const categoryImage = [
+  imgFc7,
   imgFc1,
   imgFc2,
   imgFc3,
   imgFc4,
   imgFc5,
-  imgFc6,
   imgFc7,
-  imgFc8,
+  imgFc6,
   imgFc9,
 ];
 
-const itemDetailButtonList = [
-  video,
-  reviews,
-  privacyPolicy,
-  returnPolicy,
-  supportPolicy
-];
+const itemDetailButtonList = [video, reviews, privacyPolicy, returnPolicy, supportPolicy];
 
 const profileButtonList = [wishlist, orders, messages];
 const profileButtonIcon = [icOrder, icOrder, icMessages];

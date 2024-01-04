@@ -21,10 +21,7 @@ const termAndCond = "Terms and Conditions";
 const alreadyAccount = "Already have an account? ";
 
 // Home Controller
-const home = "Home",
-    categories = "Categories",
-    cart = "Cart",
-    account = "Account";
+const home = "Home", categories = "Categories", cart = "Cart", account = "Account";
 
 // Home Screen string
 const searchAnything = "Search anything...",
@@ -44,7 +41,7 @@ const searchAnything = "Search anything...",
 
 // Category page
 const womenCLothing = "Women Clothing",
-    menCloathingFashion = "Men Cloathing & Fashion",
+    menCloathingFashion = "Men Clothing & Fashion",
     compAccess = "Computer & Accessories",
     automobile = "Automobile",
     kidToys = "Kid & Toys",
