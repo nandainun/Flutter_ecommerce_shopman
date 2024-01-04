@@ -21,8 +21,7 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         body: StreamBuilder(
           stream: FirestoreServices.getUser(currentUser!.uid),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
               return const Center(
                 child: CircularProgressIndicator(
@@ -47,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                       ).onTap(
                         () {
                           controller.nameController.text = data['name'];
-                          controller.passController.text = data['password'];
+                          controller.oldpassController.text = data['password'];
                           Get.to(
                             () => EditProfileScreen(data: data),
                           );
@@ -78,16 +77,8 @@ class ProfileScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                "${data['name']}"
-                                    .text
-                                    .fontFamily(semibold)
-                                    .white
-                                    .make(),
-                                "${data['email']}"
-                                    .text
-                                    .fontFamily(semibold)
-                                    .white
-                                    .make()
+                                "${data['name']}".text.fontFamily(semibold).white.make(),
+                                "${data['email']}".text.fontFamily(semibold).white.make()
                               ],
                             ),
                           ),
@@ -96,12 +87,10 @@ class ProfileScreen extends StatelessWidget {
                               side: const BorderSide(color: whiteColor),
                             ),
                             onPressed: () async {
-                              await Get.put(AuthController())
-                                  .signOutMethod(context);
+                              await Get.put(AuthController()).signOutMethod(context);
                               Get.offAll(() => const LoginScreen());
                             },
-                            child:
-                                logout.text.fontFamily(semibold).white.make(),
+                            child: logout.text.fontFamily(semibold).white.make(),
                           ),
                         ],
                       ),
@@ -112,18 +101,11 @@ class ProfileScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        detailsCard(count: data['cart_count'], title: "in your cart", width: context.screenWidth / 3.4),
                         detailsCard(
-                            count: data['cart_count'],
-                            title: "in your cart",
-                            width: context.screenWidth / 3.4),
+                            count: data['wishlist_count'], title: "in your cart", width: context.screenWidth / 3.4),
                         detailsCard(
-                            count: data['wishlist_count'],
-                            title: "in your cart",
-                            width: context.screenWidth / 3.4),
-                        detailsCard(
-                            count: data['order_count'],
-                            title: "in your cart",
-                            width: context.screenWidth / 3.4),
+                            count: data['order_count'], title: "in your cart", width: context.screenWidth / 3.4),
                       ],
                     ),
 
@@ -139,11 +121,7 @@ class ProfileScreen extends StatelessWidget {
                             profileButtonIcon[index],
                             width: 22,
                           ),
-                          title: profileButtonList[index]
-                              .text
-                              .fontFamily(semibold)
-                              .color(darkFontGrey)
-                              .make(),
+                          title: profileButtonList[index].text.fontFamily(semibold).color(darkFontGrey).make(),
                         );
                       },
                       separatorBuilder: (context, index) {

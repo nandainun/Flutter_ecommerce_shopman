@@ -62,4 +62,8 @@ const video = "Video",
     productsyoumaylike = "Products you may also like";
 
 // Profile string
-const wishlist = "My Wishlist", orders = "My Orders", messages = "Messages";
+const wishlist = "My Wishlist",
+    orders = "My Orders",
+    messages = "Messages",
+    oldpass = "Old password",
+    newpass = "New password";
