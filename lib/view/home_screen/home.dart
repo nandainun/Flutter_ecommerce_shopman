@@ -5,6 +5,7 @@ import 'package:shopman/view/cart_screen/cart_screen.dart';
 import 'package:shopman/view/category_screen/category_screen.dart';
 import 'package:shopman/view/home_screen/home_screen.dart';
 import 'package:shopman/view/profile_screen/profile_screen.dart';
+import 'package:shopman/widgets_common/exit_dialog.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -41,32 +42,36 @@ class Home extends StatelessWidget {
           label: account)
     ];
 
-    var navBody = [
-      const HomeScreen(),
-      const CategoryScreen(),
-      const CartScreen(),
-      const ProfileScreen()
-    ];
+    var navBody = [const HomeScreen(), const CategoryScreen(), const CartScreen(), const ProfileScreen()];
 
-    return Scaffold(
-      body: Column(children: [
-        Obx(
-          () => Expanded(
-            child: navBody.elementAt(controller.currentNavIndex.value),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) => exitDialog(context)); //Here this temporary, you can change this line
+      },
+      child: Scaffold(
+        body: Column(children: [
+          Obx(
+            () => Expanded(
+              child: navBody.elementAt(controller.currentNavIndex.value),
+            ),
           ),
-        ),
-      ]),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          selectedItemColor: redColor,
-          selectedLabelStyle: const TextStyle(fontFamily: semibold),
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: whiteColor,
-          items: navbarItem,
-          onTap: (value) {
-            controller.currentNavIndex.value = value;
-          },
+        ]),
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            currentIndex: controller.currentNavIndex.value,
+            selectedItemColor: redColor,
+            selectedLabelStyle: const TextStyle(fontFamily: semibold),
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: whiteColor,
+            items: navbarItem,
+            onTap: (value) {
+              controller.currentNavIndex.value = value;
+            },
+          ),
         ),
       ),
     );
