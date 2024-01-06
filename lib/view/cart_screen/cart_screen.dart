@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:shopman/consts/consts.dart';
+import 'package:shopman/controllers/cart_controller.dart';
 import 'package:shopman/services/firestore_services.dart';
 import 'package:shopman/widgets_common/loading_indicator.dart';
 import 'package:shopman/widgets_common/our_button2.dart';
@@ -9,6 +11,8 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(CartController());
+
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
@@ -28,6 +32,8 @@ class CartScreen extends StatelessWidget {
             );
           } else {
             var data = snapshot.data!.docs;
+            controller.calculate(data);
+
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -53,7 +59,15 @@ class CartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       "Total price".text.fontFamily(semibold).size(20).color(darkFontGrey).make(),
-                      "40".numCurrency.text.fontFamily(semibold).size(20).color(redColor).make(),
+                      Obx(
+                        () => "${controller.totalP.value}"
+                            .numCurrency
+                            .text
+                            .fontFamily(semibold)
+                            .size(20)
+                            .color(redColor)
+                            .make(),
+                      ),
                     ],
                   )
                       .box
