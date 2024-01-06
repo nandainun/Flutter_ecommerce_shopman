@@ -15,4 +15,9 @@ class FirestoreServices {
   static getCart(uid) {
     return firestore.collection(cartCollection).where('added_by', isEqualTo: uid).snapshots();
   }
+
+  // Delete document
+  static deleteDocument(docId) {
+    return firestore.collection(cartCollection).doc(docId).delete();
+  }
 }

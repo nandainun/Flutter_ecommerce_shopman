@@ -44,13 +44,19 @@ class CartScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           leading: Image.network('${data[index]['img']}'),
-                          title: "${data[index]['title']},".text.fontFamily(semibold).size(16).make(),
+                          title: "${data[index]['title']} (x${data[index]['qty']})"
+                              .text
+                              .fontFamily(semibold)
+                              .size(16)
+                              .make(),
                           subtitle:
                               "${data[index]['tprice']}".numCurrency.text.color(redColor).fontFamily(semibold).make(),
                           trailing: const Icon(
                             Icons.delete,
                             color: redColor,
-                          ).onTap(() {}),
+                          ).onTap(() {
+                            FirestoreServices.deleteDocument(data[index].id);
+                          }),
                         );
                       },
                     ),
